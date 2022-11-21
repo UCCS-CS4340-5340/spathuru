@@ -1,4 +1,4 @@
-package net.test.jabref;
+package net.sf.jabref;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,7 +13,7 @@ import net.sf.jabref.CheckBoxMessage;
 
 class CheckBoxMessageTest {
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         CheckBoxMessage actualCheckBoxMessage = new CheckBoxMessage("Not all who wander are lost", "Cb Text", true);
         assertNull(actualCheckBoxMessage.getGbl().columnWidths);
         GridBagConstraints gridBagConstraints = actualCheckBoxMessage.getCon();
@@ -23,7 +23,7 @@ class CheckBoxMessageTest {
         assertEquals(10, gridBagConstraints.insets.top);
     }
     @Test
-    void testIsSelected() {
+    public void testIsSelected() {
         assertTrue((new CheckBoxMessage("Not all who wander are lost", "Cb Text", true)).isSelected());
         assertFalse((new CheckBoxMessage("Not all who wander are lost", "Cb Text", false)).isSelected());
     }

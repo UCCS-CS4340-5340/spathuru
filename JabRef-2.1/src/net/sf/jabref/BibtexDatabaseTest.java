@@ -1,4 +1,4 @@
-package net.test.jabref;
+package net.sf.jabref;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

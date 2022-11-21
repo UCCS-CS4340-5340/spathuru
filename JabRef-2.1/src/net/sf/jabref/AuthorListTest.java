@@ -1,4 +1,4 @@
-package net.test.jabref;
+package net.sf.jabref;
 
 import static org.junit.Assert.assertEquals;
 
@@ -42,6 +42,8 @@ class AuthorListTest {
         assertEquals("", AuthorList.fixAuthor_Natbib(",,In Orig"));
         assertEquals("", AuthorList.fixAuthor_Natbib(",,,"));
     }
+    
+    
     @Test
     void testFixAuthor_firstNameFirstCommas() {
         assertEquals("I. Orig", AuthorList.fixAuthor_firstNameFirstCommas("In Orig", true));
