@@ -1,13 +1,15 @@
 package net.sf.jabref;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ca.odell.glazedlists.impl.adt.AgedNodeComparator;
+
+import java.util.Comparator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +19,7 @@ import net.sf.jabref.*;
 import net.sf.jabref.gui.GlazedEntrySorter;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class BibtexDatabaseTest {
     @Test
@@ -168,8 +170,7 @@ class BibtexDatabaseTest {
     @Test
     void testHasStringLabel2() throws KeyCollisionException {
         BibtexDatabase bibtexDatabase = new BibtexDatabase();
-        bibtexDatabase.addString(new BibtexString("42", "Name", "Not all who wander are lost"));
-        assertFalse(bibtexDatabase.hasStringLabel("Label"));
+        bibtexDatabase.addString(new BibtexString("42", "Name", "Not all who wander are lost"));        assertFalse(bibtexDatabase.hasStringLabel("Label"));
     }
     @Test
     void testHasStringLabel3() throws KeyCollisionException {
@@ -179,11 +180,11 @@ class BibtexDatabaseTest {
     }
     @Test
     void testResolveForStrings() {
-        assertEquals("Not all who wander are lost",(new BibtexDatabase()).resolveForStrings("Not all who wander are lost"));
+        assertEquals("Not all who wander are lost", (new BibtexDatabase()).resolveForStrings("Not all who wander are lost"));
         assertEquals("xx#UUU#xx", (new BibtexDatabase()).resolveForStrings("xx#UUU#xx"));
         assertEquals(".*#[^#]+#.*", (new BibtexDatabase()).resolveForStrings(".*#[^#]+#.*"));
-        assertEquals("Not all who wander are lostxx#UUU#xx",(new BibtexDatabase()).resolveForStrings("Not all who wander are lostxx#UUU#xx"));
-        assertEquals("Not all who wander are lost.*#[^#]+#.*",(new BibtexDatabase()).resolveForStrings("Not all who wander are lost.*#[^#]+#.*"));
+        assertEquals("Not all who wander are lostxx#UUU#xx", (new BibtexDatabase()).resolveForStrings("Not all who wander are lostxx#UUU#xx"));
+        assertEquals("Not all who wander are lost.*#[^#]+#.*", (new BibtexDatabase()).resolveForStrings("Not all who wander are lost.*#[^#]+#.*"));
     }
     @Test
     void testResolveForStrings2() throws KeyCollisionException {
@@ -213,8 +214,7 @@ class BibtexDatabaseTest {
     void testResolveForStrings8() throws KeyCollisionException {
         BibtexDatabase bibtexDatabase = new BibtexDatabase();
         bibtexDatabase.addString(new BibtexString("42", "xx#UUU#xx", "Not all who wander are lost"));
-        assertEquals("Not all who wander are lostxx#uuu#xx",
-                bibtexDatabase.resolveForStrings("Not all who wander are lostxx#uuu#xx"));
+        assertEquals("Not all who wander are lostxx#uuu#xx", bibtexDatabase.resolveForStrings("Not all who wander are lostxx#uuu#xx"));
     }
     @Test
     void testCheckForDuplicateKeyAndAdd() {
@@ -229,8 +229,7 @@ class BibtexDatabaseTest {
     void testGetNumberOfKeyOccurences() {
         assertEquals(0, (new BibtexDatabase()).getNumberOfKeyOccurences("Key"));
     }
-    @SuppressWarnings("rawtypes")
-	@Test
+    @Test
     void testFireDatabaseChanged() {
         BibtexDatabase bibtexDatabase = new BibtexDatabase();
         BibtexDatabase source = new BibtexDatabase();
@@ -264,8 +263,7 @@ class BibtexDatabaseTest {
         bibtexDatabase.removeDatabaseChangeListener(new EntrySorter(entries, new AgedNodeComparator()));
         assertTrue(bibtexDatabase.getChangeListeners().isEmpty());
     }
-    @SuppressWarnings("rawtypes")
-	@Test
+    @Test
     void testConstructor() {
         BibtexDatabase actualBibtexDatabase = new BibtexDatabase();
         actualBibtexDatabase.setPreamble("Preamble");

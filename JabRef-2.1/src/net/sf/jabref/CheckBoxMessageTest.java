@@ -1,19 +1,17 @@
 package net.sf.jabref;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.GridBagConstraints;
 
-import org.junit.Test;
-
-import net.sf.jabref.CheckBoxMessage;
+import org.junit.jupiter.api.Test;
 
 class CheckBoxMessageTest {
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         CheckBoxMessage actualCheckBoxMessage = new CheckBoxMessage("Not all who wander are lost", "Cb Text", true);
         assertNull(actualCheckBoxMessage.getGbl().columnWidths);
         GridBagConstraints gridBagConstraints = actualCheckBoxMessage.getCon();
@@ -23,7 +21,7 @@ class CheckBoxMessageTest {
         assertEquals(10, gridBagConstraints.insets.top);
     }
     @Test
-    public void testIsSelected() {
+    void testIsSelected() {
         assertTrue((new CheckBoxMessage("Not all who wander are lost", "Cb Text", true)).isSelected());
         assertFalse((new CheckBoxMessage("Not all who wander are lost", "Cb Text", false)).isSelected());
     }

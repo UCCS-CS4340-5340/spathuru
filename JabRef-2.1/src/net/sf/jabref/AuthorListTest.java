@@ -1,26 +1,12 @@
 package net.sf.jabref;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import net.sf.jabref.AuthorList;
 import net.sf.jabref.DuplicateResolverDialog;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 class AuthorListTest {
-    @Test
-    void testConstructor() {
-        AuthorList actualAuthorList = new AuthorList("JaneDoe");
-        assertEquals("JaneDoe", actualAuthorList.getAuthorsFirstFirstAnds());
-        assertEquals(DuplicateResolverDialog.NOT_CHOSEN, actualAuthorList.getVon_start());
-        assertEquals(DuplicateResolverDialog.NOT_CHOSEN, actualAuthorList.getLast_start());
-        assertEquals(DuplicateResolverDialog.NOT_CHOSEN, actualAuthorList.getComma_first());
-        assertEquals(DuplicateResolverDialog.NOT_CHOSEN, actualAuthorList.getComma_second());
-        assertEquals(1, actualAuthorList.size());
-        assertEquals("JaneDoe", actualAuthorList.getAuthorsNatbib());
-        assertEquals("JaneDoe", actualAuthorList.getAuthorsLastOnly());
-        assertEquals("JaneDoe", actualAuthorList.getAuthorsLastFirstAnds());
-        assertEquals("JaneDoe", actualAuthorList.getAuthorsForAlphabetization());
-    }
     @Test
     void testFixAuthor_Natbib() {
         assertEquals("Orig", AuthorList.fixAuthor_Natbib("In Orig"));
@@ -42,8 +28,6 @@ class AuthorListTest {
         assertEquals("", AuthorList.fixAuthor_Natbib(",,In Orig"));
         assertEquals("", AuthorList.fixAuthor_Natbib(",,,"));
     }
-    
-    
     @Test
     void testFixAuthor_firstNameFirstCommas() {
         assertEquals("I. Orig", AuthorList.fixAuthor_firstNameFirstCommas("In Orig", true));
@@ -69,7 +53,7 @@ class AuthorListTest {
     }
     @Test
     void testFixAuthor_lastNameFirstCommas() {
-    	assertEquals("Orig, I.", AuthorList.fixAuthor_lastNameFirstCommas("In Orig", true));
+        assertEquals("Orig, I.", AuthorList.fixAuthor_lastNameFirstCommas("In Orig", true));
         assertEquals("", AuthorList.fixAuthor_lastNameFirstCommas(", ", true));
         assertEquals("42", AuthorList.fixAuthor_lastNameFirstCommas("42", true));
         assertEquals("j", AuthorList.fixAuthor_lastNameFirstCommas("j", true));
