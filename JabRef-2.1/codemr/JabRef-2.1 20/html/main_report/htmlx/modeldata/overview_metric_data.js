@@ -1,0 +1,1 @@
+var CodeMR_ProjectMetrics = {"Project Name":"JabRef-2.1", "Number of Highly Problematic Classes":5, "Number of Entities":552, "Number of Problematic Classes":34, "Class Lines of Code":33857, "Number of External Packages":86, "Number of Packages":27, "Number of External Entities":764}

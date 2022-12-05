@@ -225,11 +225,11 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
 
     private void setupActions() {
 
-        actions.put("undo", undoAction);
-        actions.put("redo", redoAction);
+        getActions().put("undo", undoAction);
+        getActions().put("redo", redoAction);
 
         // The action for opening an entry editor.
-        actions.put("edit", new BaseAction() {
+        getActions().put("edit", new BaseAction() {
             public void action() {
                 selectionListener.editSignalled();
             }
@@ -263,7 +263,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             });
 
 
-        actions.put("test", new BaseAction () {
+        getActions().put("test", new BaseAction () {
                 public void action() throws Throwable {
 
 
@@ -274,7 +274,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
 
 
         // The action for saving a database.
-        actions.put("save", new AbstractWorker() {
+        getActions().put("save", new AbstractWorker() {
             private boolean success = false, cancelled = false;
             public void init() throws Throwable {
                 success = false;
@@ -390,7 +390,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             }
         });
 
-        actions.put("saveAs", new BaseAction () {
+        getActions().put("saveAs", new BaseAction () {
                 public void action() throws Throwable {
 
                   String chosenFile = Globals.getNewFile(frame, new File(Globals.prefs.get("workingDirectory")), ".bib",
@@ -422,7 +422,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
             });
 
-        actions.put("saveSelectedAs", new BaseAction () {
+        getActions().put("saveSelectedAs", new BaseAction () {
                 public void action() throws Throwable {
 
                   String chosenFile = Globals.getNewFile(frame, new File(Globals.prefs.get("workingDirectory")), ".bib",
@@ -446,7 +446,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             });
 
         // The action for copying selected entries.
-        actions.put("copy", new BaseAction() {
+        getActions().put("copy", new BaseAction() {
                 public void action() {
                     BibtexEntry[] bes = mainTable.getSelectedEntries();
 
@@ -478,7 +478,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
             });
 
-        actions.put("cut", new BaseAction() {
+        getActions().put("cut", new BaseAction() {
                 public void action() throws Throwable {
                     runCommand("copy");
                     BibtexEntry[] bes = mainTable.getSelectedEntries();
@@ -512,7 +512,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
             });
 
-        actions.put("delete", new BaseAction() {
+        getActions().put("delete", new BaseAction() {
                 public void action() {
                   boolean cancelled = false;
                   BibtexEntry[] bes = mainTable.getSelectedEntries();
@@ -570,7 +570,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
         //    This allows you to (a) paste entire bibtex entries from a text editor, web browser, etc
         //                       (b) copy and paste entries between multiple instances of JabRef (since
         //         only the text representation seems to get as far as the X clipboard, at least on my system)
-        actions.put("paste", new BaseAction() {
+        getActions().put("paste", new BaseAction() {
                 public void action() {
                     // Get clipboard contents, and see if TransferableBibtexEntry is among the content flavors offered
                     Transferable content = Toolkit.getDefaultToolkit()
@@ -682,14 +682,14 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
 
 });
 
-        actions.put("selectAll", new BaseAction() {
+        getActions().put("selectAll", new BaseAction() {
                 public void action() {
                     mainTable.selectAll();
                 }
             });
 
         // The action for opening the preamble editor
-        actions.put("editPreamble", new BaseAction() {
+        getActions().put("editPreamble", new BaseAction() {
                 public void action() {
                     if (preambleEditor == null) {
                         PreambleEditor form = new PreambleEditor
@@ -705,7 +705,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             });
 
         // The action for opening the string editor
-        actions.put("editStrings", new BaseAction() {
+        getActions().put("editStrings", new BaseAction() {
                 public void action() {
                     if (stringDialog == null) {
                         StringDialog form = new StringDialog
@@ -721,7 +721,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             });
 
         // The action for toggling the groups interface
-        actions.put("toggleGroups", new BaseAction() {
+        getActions().put("toggleGroups", new BaseAction() {
             public void action() {
               sidePaneManager.togglePanel("groups");
               frame.groupToggle.setSelected(sidePaneManager.isPanelVisible("groups"));
@@ -730,7 +730,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
 
 
         // The action for auto-generating keys.
-        actions.put("makeKey", new AbstractWorker() {
+        getActions().put("makeKey", new AbstractWorker() {
         //int[] rows;
         List entries;
         int numSelected;
@@ -826,7 +826,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
         }
     });
 
-        actions.put("search", new BaseAction() {
+        getActions().put("search", new BaseAction() {
                 public void action() {
                     //sidePaneManager.togglePanel("search");
                     sidePaneManager.ensureVisible("search");
@@ -837,7 +837,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
             });
 
-        actions.put("toggleSearch", new BaseAction() {
+        getActions().put("toggleSearch", new BaseAction() {
                 public void action() {
                     //sidePaneManager.togglePanel("search");
                     sidePaneManager.togglePanel("search");
@@ -848,7 +848,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
             });
 
-        actions.put("incSearch", new BaseAction() {
+        getActions().put("incSearch", new BaseAction() {
                 public void action() {
                     sidePaneManager.ensureVisible("search");
                     frame.searchToggle.setSelected(true);
@@ -857,7 +857,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             });
 
         // The action for copying the selected entry's key.
-        actions.put("copyKey", new BaseAction() {
+        getActions().put("copyKey", new BaseAction() {
                 public void action() {
                     BibtexEntry[] bes = mainTable.getSelectedEntries();
                     if ((bes != null) && (bes.length > 0)) {
@@ -895,7 +895,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
             });
 
         // The action for copying a cite for the selected entry.
-        actions.put("copyCiteKey", new BaseAction() {
+        getActions().put("copyCiteKey", new BaseAction() {
                 public void action() {
                     BibtexEntry[] bes = mainTable.getSelectedEntries();
                     if ((bes != null) && (bes.length > 0)) {
@@ -933,9 +933,9 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
             });
 
-          actions.put("mergeDatabase", new AppendDatabaseAction(frame, this));
+          getActions().put("mergeDatabase", new AppendDatabaseAction(frame, this));
 
-         actions.put("openFile", new BaseAction() {
+         getActions().put("openFile", new BaseAction() {
            public void action() {
              (new Thread() {
                public void run() {
@@ -998,7 +998,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
          });
 
 
-              actions.put("openUrl", new BaseAction() {
+              getActions().put("openUrl", new BaseAction() {
                       public void action() {
                           BibtexEntry[] bes = mainTable.getSelectedEntries();
                           String field = "doi";
@@ -1024,7 +1024,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                       }
               });
 
-          actions.put("replaceAll", new BaseAction() {
+          getActions().put("replaceAll", new BaseAction() {
                     public void action() {
                       ReplaceStringDialog rsd = new ReplaceStringDialog(frame);
                       rsd.setVisible(true);
@@ -1052,21 +1052,21 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                   }
               });
 
-              actions.put("dupliCheck", new BaseAction() {
+              getActions().put("dupliCheck", new BaseAction() {
                 public void action() {
                   DuplicateSearch ds = new DuplicateSearch(BasePanel.this);
                   ds.start();
                 }
               });
 
-              actions.put("strictDupliCheck", new BaseAction() {
+              getActions().put("strictDupliCheck", new BaseAction() {
                 public void action() {
                   StrictDuplicateSearch ds = new StrictDuplicateSearch(BasePanel.this);
                   ds.start();
                 }
               });
 
-              actions.put("plainTextImport", new BaseAction() {
+              getActions().put("plainTextImport", new BaseAction() {
                 public void action()
                 {
                   // get Type of new entry
@@ -1134,7 +1134,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                       }
                   });
                 */
-              actions.put("markEntries", new AbstractWorker() {
+              getActions().put("markEntries", new AbstractWorker() {
                   private int besLength = -1;
                 public void run() {
 
@@ -1157,7 +1157,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
               });
 
-              actions.put("unmarkEntries", new BaseAction() {
+              getActions().put("unmarkEntries", new BaseAction() {
                 public void action() {
                     try {
                   NamedCompound ce = new NamedCompound(Globals.lang("Unmark entries"));
@@ -1175,7 +1175,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
               });
 
-              actions.put("unmarkAll", new BaseAction() {
+              getActions().put("unmarkAll", new BaseAction() {
                 public void action() {
                   NamedCompound ce = new NamedCompound(Globals.lang("Unmark all"));
                   Set keySet = database.getKeySet();
@@ -1190,7 +1190,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
               });
 
-              actions.put("togglePreview", new BaseAction() {
+              getActions().put("togglePreview", new BaseAction() {
                       public void action() {
                           boolean enabled = !Globals.prefs.getBoolean("previewEnabled");
                           Globals.prefs.putBoolean("previewEnabled", enabled);
@@ -1199,7 +1199,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                       }
                   });
 
-              actions.put("toggleHighlightGroupsMatchingAny", new BaseAction() {
+              getActions().put("toggleHighlightGroupsMatchingAny", new BaseAction() {
                 public void action() {
                     boolean enabled = !Globals.prefs.getBoolean("highlightGroupsMatchingAny");
                     Globals.prefs.putBoolean("highlightGroupsMatchingAny", enabled);
@@ -1213,7 +1213,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                 }
               });
 
-              actions.put("toggleHighlightGroupsMatchingAll", new BaseAction() {
+              getActions().put("toggleHighlightGroupsMatchingAll", new BaseAction() {
                   public void action() {
                       boolean enabled = !Globals.prefs.getBoolean("highlightGroupsMatchingAll");
                       Globals.prefs.putBoolean("highlightGroupsMatchingAll", enabled);
@@ -1227,13 +1227,13 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                   }
                 });
 
-              actions.put("switchPreview", new BaseAction() {
+              getActions().put("switchPreview", new BaseAction() {
                       public void action() {
                           selectionListener.switchPreview();
                       }
                   });
 
-              actions.put("manageSelectors", new BaseAction() {
+              getActions().put("manageSelectors", new BaseAction() {
                       public void action() {
                           ContentSelectorDialog2 csd = new ContentSelectorDialog2
                               (frame, frame, BasePanel.this, false, metaData, null);
@@ -1243,7 +1243,7 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
                   });
 
 
-              actions.put("exportToClipboard", new AbstractWorker() {
+              getActions().put("exportToClipboard", new AbstractWorker() {
               String message = null;
               public void run() {
               if (mainTable.getSelected().size() == 0) {
@@ -1319,11 +1319,11 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
 
 
 
-        actions.put("abbreviateIso", new AbbreviateAction(this, true));
-        actions.put("abbreviateMedline", new AbbreviateAction(this, false));
-        actions.put("unabbreviate", new UnabbreviateAction(this));
-        actions.put("autoSetPdf", new AutoSetExternalFileForEntries(this, "pdf"));
-        actions.put("autoSetPs", new AutoSetExternalFileForEntries(this, "ps"));
+        getActions().put("abbreviateIso", new AbbreviateAction(this, true));
+        getActions().put("abbreviateMedline", new AbbreviateAction(this, false));
+        getActions().put("unabbreviate", new UnabbreviateAction(this));
+        getActions().put("autoSetPdf", new AutoSetExternalFileForEntries(this, "pdf"));
+        getActions().put("autoSetPs", new AutoSetExternalFileForEntries(this, "ps"));
 
     }
 
@@ -1339,10 +1339,10 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
       final String command = _command;
       //(new Thread() {
       //  public void run() {
-          if (actions.get(command) == null)
+          if (getActions().get(command) == null)
             Util.pr("No action defined for'" + command + "'");
             else {
-        Object o = actions.get(command);
+        Object o = getActions().get(command);
         try {
             if (o instanceof BaseAction)
             ((BaseAction)o).action();
@@ -2405,5 +2405,13 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
     public GroupSelector getGroupSelector() {
         return frame.groupSelector;
     }
+
+	public HashMap getActions() {
+		return actions;
+	}
+
+	public void setActions(HashMap actions) {
+		this.actions = actions;
+	}
 
 }

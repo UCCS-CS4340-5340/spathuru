@@ -1,0 +1,1 @@
+{"JabRef-2.1":{"name":"JabRef-2.1","packages":{"net.sf.jabref":{"packageName":"net.sf.jabref","isAll":false,"classes":["Lnet/sf/jabref/FontSelectorDialogTest;"]}}}}
